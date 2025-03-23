@@ -27,10 +27,10 @@
         </header>
         
         <div class="tab-container">
-            <button class="tab active" onclick="openTabDirect('alphabet')">אותיות</button>
-            <button class="tab" onclick="openTabDirect('words')">מילים</button>
-            <button class="tab" onclick="openTabDirect('sentences')">משפטים</button>
-            <button class="tab" onclick="openTabDirect('exercises')">תרגול</button>
+            <button class="tab active" data-tab="alphabet" onclick="openTab('alphabet')">אותיות</button>
+            <button class="tab" data-tab="words" onclick="openTab('words')">מילים</button>
+            <button class="tab" data-tab="sentences" onclick="openTab('sentences')">משפטים</button>
+            <button class="tab" data-tab="exercises" onclick="openTab('exercises')">תרגול</button>
         </div>
         
         <!-- תוכן הלשוניות -->
@@ -59,7 +59,96 @@
                     <div class="letter-example">דָּלֶת</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <!-- יתר האותיות כאן -->
+                <div class="letter-card" onclick="playSound('hey')">
+                    <div class="letter">ה</div>
+                    <div class="letter-example">הֵא</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('vav')">
+                    <div class="letter">ו</div>
+                    <div class="letter-example">וָו</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('zayin')">
+                    <div class="letter">ז</div>
+                    <div class="letter-example">זַיִן</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('het')">
+                    <div class="letter">ח</div>
+                    <div class="letter-example">חֵית</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('tet')">
+                    <div class="letter">ט</div>
+                    <div class="letter-example">טֵית</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('yod')">
+                    <div class="letter">י</div>
+                    <div class="letter-example">יוֹד</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('kaf')">
+                    <div class="letter">כ</div>
+                    <div class="letter-example">כַּף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('lamed')">
+                    <div class="letter">ל</div>
+                    <div class="letter-example">לָמֶד</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('mem')">
+                    <div class="letter">מ</div>
+                    <div class="letter-example">מֵם</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('nun')">
+                    <div class="letter">נ</div>
+                    <div class="letter-example">נוּן</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('samekh')">
+                    <div class="letter">ס</div>
+                    <div class="letter-example">סָמֶךְ</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('ayin')">
+                    <div class="letter">ע</div>
+                    <div class="letter-example">עַיִן</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('pe')">
+                    <div class="letter">פ</div>
+                    <div class="letter-example">פֵּה</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('tsadi')">
+                    <div class="letter">צ</div>
+                    <div class="letter-example">צָדִי</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('qof')">
+                    <div class="letter">ק</div>
+                    <div class="letter-example">קוֹף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('resh')">
+                    <div class="letter">ר</div>
+                    <div class="letter-example">רֵישׁ</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('shin')">
+                    <div class="letter">ש</div>
+                    <div class="letter-example">שִׁין</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('tav')">
+                    <div class="letter">ת</div>
+                    <div class="letter-example">תָּו</div>
+                    <button class="sound-button">השמע</button>
+                </div>
             </div>
         </div>
         
@@ -68,13 +157,42 @@
             <p>מילים שימושיות בעברית</p>
             
             <div class="words-grid">
-                <div class="word-card" onclick="playSound('word-apple')">
-                    <img src="https://github.com/user-attachments/assets/07c33929-6c07-4943-8c41-4613d69d1bb6" class="word-image" alt="תפוח">
-                    <div class="hebrew-word">תַּפּוּחַ</div>
-                    <div class="translation">Яблоко</div>
+                <div class="word-card" onclick="playSound('word-cat')">
+                    <img src="https://github.com/user-attachments/assets/07c33929-6c07-4943-8c41-4613d69d1bb6" class="word-image" alt="חתול">
+                    <div class="hebrew-word">חָתוּל</div>
+                    <div class="translation">Кот</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <!-- יתר המילים כאן -->
+                <div class="word-card" onclick="playSound('word-dog')">
+                    <img src="https://github.com/user-attachments/assets/4909a03b-015f-4a76-bbca-166d4e31f0ba" class="word-image" alt="כלב">
+                    <div class="hebrew-word">כֶּלֶב</div>
+                    <div class="translation">Собака</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-house')">
+                    <img src="https://github.com/user-attachments/assets/a77bb6c8-3ef8-4e12-a9ce-2bd7c6cc1b89" class="word-image" alt="בית">
+                    <div class="hebrew-word">בַּיִת</div>
+                    <div class="translation">Дом</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-tree')">
+                    <img src="https://github.com/user-attachments/assets/227dd48f-763c-45af-9c06-3b2ec27ba442" class="word-image" alt="עץ">
+                    <div class="hebrew-word">עֵץ</div>
+                    <div class="translation">Дерево</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-book')">
+                    <img src="https://github.com/user-attachments/assets/8525d62b-234a-4a21-a678-5fd82fc4e8ba" class="word-image" alt="ספר">
+                    <div class="hebrew-word">סֵפֶר</div>
+                    <div class="translation">Книга</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-water')">
+                    <img src="https://github.com/user-attachments/assets/a0d2561e-b124-4788-9ca1-02c7cf8760cc" class="word-image" alt="מים">
+                    <div class="hebrew-word">מַיִם</div>
+                    <div class="translation">Вода</div>
+                    <button class="sound-button">השמע</button>
+                </div>
             </div>
         </div>
         
@@ -83,12 +201,31 @@
             <p>משפטים בסיסיים בעברית</p>
             
             <div class="sentences-grid">
-                <div class="sentence-card" onclick="playSound('sentence-hello')">
-                    <div class="hebrew-sentence">שָׁלוֹם</div>
-                    <div class="translation">Привет</div>
+                <div class="sentence-card" onclick="playSound('sentence-cat-eats-fish')">
+                    <div class="hebrew-sentence">הַחָתוּל אוֹכֵל דָּג</div>
+                    <div class="translation">Кот ест рыбу</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <!-- יתר המשפטים כאן -->
+                <div class="sentence-card" onclick="playSound('sentence-boy-reads-book')">
+                    <div class="hebrew-sentence">הַיֶּלֶד קוֹרֵא סֵפֶר</div>
+                    <div class="translation">Мальчик читает книгу</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-girl-drinks-water')">
+                    <div class="hebrew-sentence">הַיַּלְדָּה שׁוֹתָה מַיִם</div>
+                    <div class="translation">Девочка пьет воду</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-dog-runs-garden')">
+                    <div class="hebrew-sentence">הַכֶּלֶב רָץ בַּגִּנָּה</div>
+                    <div class="translation">Собака бежит в саду</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-sun-shines-sky')">
+                    <div class="hebrew-sentence">הַשֶּׁמֶשׁ זוֹרַחַת בַּשָּׁמַיִם</div>
+                    <div class="translation">Солнце светит в небе</div>
+                    <button class="sound-button">השמע</button>
+                </div>
             </div>
         </div>
         
@@ -102,34 +239,25 @@
                     <p>התאימו את האותיות לתמונות המתאימות</p>
                     <button class="sound-button">התחל</button>
                 </div>
-                <!-- יתר התרגילים כאן -->
+                <div class="exercise-card" onclick="openExercise('word-game')">
+                    <h3>משחק מילים</h3>
+                    <p>נחשו את המילה לפי התמונה</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <div class="exercise-card" onclick="openExercise('sentences-order')">
+                    <h3>סדר משפטים</h3>
+                    <p>סדרו את המילים במשפט בסדר הנכון</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <div class="exercise-card" onclick="openExercise('translation-quiz')">
+                    <h3>חידון תרגום</h3>
+                    <p>תרגמו את המילים מעברית לרוסית ולהיפך</p>
+                    <button class="sound-button">התחל</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        // פונקציה לניווט בין הלשוניות ללא AJAX
-        function openTabDirect(tabName) {
-            // מסתיר את כל התוכן
-            var tabContents = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            
-            // מסיר את המחלקה 'active' מכל הלשוניות
-            var tabs = document.getElementsByClassName('tab');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            
-            // מציג את התוכן הנבחר
-            document.getElementById(tabName).classList.add('active');
-            
-            // מוצא את הלשונית המתאימה ומוסיף לה את המחלקה 'active'
-            var clickedTab = event.currentTarget;
-            clickedTab.classList.add('active');
-        }
-    </script>
 </body>
 </html>
