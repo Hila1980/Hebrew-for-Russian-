@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>לומדים עברית</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #4a6da7;
+            padding-bottom: 10px;
+        }
+        
+        h1 {
+            color: #4a6da7;
+            margin-bottom: 10px;
+        }
+        
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 5px 5px 0 0;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .tab.active {
+            background-color: #4a6da7;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+            min-height: 400px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .letter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .letter-card {
+            width: 100px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .letter {
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .letter-example {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .sound-button {
+            background-color: #4a6da7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 3px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        
+        .sound-button:hover {
+            background-color: #3a5a8a;
+        }
+        
+        .words-grid, .sentences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .word-card, .sentence-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .word-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 10px;
+            object-fit: contain;
+        }
+        
+        .hebrew-word, .hebrew-sentence {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .translation {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .exercise-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>לומדים עברית</h1>
+            <p>אתר ללימוד השפה העברית לעולים חדשים</p>
+        </header>
+        
+        <div class="tab-container">
+            <button class="tab active" onclick="openTab('alphabet')">אותיות</button>
+            <button class="tab" onclick="openTab('words')">מילים</button>
+            <button class="tab" onclick="openTab('sentences')">משפטים</button>
+            <button class="tab" onclick="openTab('exercises')">תרגול</button>
+        </div>
+        
+        <div id="alphabet" class="tab-content active">
+            <h2>האותיות בעברית</h2>
+            <p>לחצו על האותיות כדי לשמוע את הצליל שלהן</p>
+            
+            <div class="letter-container">
+                <div class="letter-card" onclick="playSound('alef')">
+                    <div class="letter">א</div>
+                    <div class="letter-example">אָלֶף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('bet')">
+                    <div class="letter">ב</div>
+                    <div class="letter-example">בֵּית</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('gimel')">
+                    <div class="letter">ג</div>
+                    <div class="letter-example">גִימֶל</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('dalet')">
+                    <div class="letter">ד</div>
+                    <div class="letter-example">דָּלֶת</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר האותיות כאן -->
+            </div>
+        </div>
+        
+        <div id="words" class="tab-content">
+            <h2>מילים בסיסיות</h2>
+            <p>מילים שימושיות בעברית</p>
+            
+            <div class="words-grid">
+                <div class="word-card" onclick="playSound('word-cat')">
+                    <img src="https://github.com/user-attachments/assets/cf467c3c-677c-409e-b8de-d987cf8490a2" class="word-image" alt="חתול">
+                    <div class="hebrew-word">חָתוּל</div>
+                    <div class="translation">Кот</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-dog')">
+                    <img src="https://github.com/user-attachments/assets/846c1758-e46b-4156-890c-0dec6d37126c" class="word-image" alt="כלב">
+                    <div class="hebrew-word">כֶּלֶב</div>
+                    <div class="translation">Собака</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר המילים כאן -->
+            </div>
+        </div>
+        
+        <div id="sentences" class="tab-content">
+            <h2>משפטים פשוטים</h2>
+            <p>משפטים בסיסיים בעברית</p>
+            
+            <div class="sentences-grid">
+                <div class="sentence-card" onclick="playSound('sentence-hello')">
+                    <div class="hebrew-sentence">שָׁלוֹם</div>
+                    <div class="translation">Привет</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר המשפטים כאן -->
+            </div>
+        </div>
+        
+        <div id="exercises" class="tab-content">
+            <h2>תרגילים</h2>
+            <p>תרגול השפה העברית</p>
+            
+            <div class="exercises-grid">
+                <div class="exercise-card" onclick="alert('התרגיל בבנייה ויהיה זמין בקרוב!')">
+                    <h3>התאמת אותיות</h3>
+                    <p>התאימו את האותיות לתמונות המתאימות</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <!-- יתר התרגילים כאן -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // מסתיר את כל התוכן
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // מסיר את המחלקה 'active' מכל הלשוניות
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // מציג את התוכן הנבחר
+            document.getElementById(tabName).classList.add('active');
+            
+            // מוצא את הלשונית המתאימה ומוסיף לה את המחלקה 'active'
+            for (var i = 0; i < tabs.length; i++) {
+                if (tabs[i].textContent === getTabName(tabName)) {
+                    tabs[i].classList.add('active');
+                }
+            }
+        }
+        
+        function getTabName(tabId) {
+            switch(tabId) {
+                case 'alphabet': return 'אותיות';
+                case 'words': return 'מילים';
+                case 'sentences': return 'משפטים';
+                case 'exercises': return 'תרגול';
+                default: return '';
+            }
+        }
+        
+        function playSound(soundId) {
+            // ניסיון להשמיע קובץ שמע
+            try {
+                var audio = new Audio('sounds/' + soundId + '.mp4');  // שימוש בסיומת MP4 במקום MP3
+                audio.play().catch(function(error) {
+                    console.error("שגיאה בהשמעת קובץ שמע:", error);
+                    alert("לא ניתן להשמיע את הצליל כרגע");
+                });
+            } catch(e) {
+                console.error("שגיאה בהשמעת קובץ שמע:", e);
+                alert("לא ניתן להשמיע את הצליל כרגע");
+            }
+        }
+    </script>
+</body>
+</html>
