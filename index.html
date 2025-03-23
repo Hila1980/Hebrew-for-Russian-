@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>לומדים עברית</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>לומדים עברית</h1>
+            <p>אתר ללימוד השפה העברית לעולים חדשים</p>
+        </header>
+        
+        <div class="tab-container">
+            <button class="tab active" data-tab="alphabet" onclick="openTab('alphabet')">אותיות</button>
+            <button class="tab" data-tab="words" onclick="openTab('words')">מילים</button>
+            <button class="tab" data-tab="sentences" onclick="openTab('sentences')">משפטים</button>
+            <button class="tab" data-tab="exercises" onclick="openTab('exercises')">תרגול</button>
+        </div>
+        
+        <div id="content-container" class="content-container">
+            <!-- התוכן של הלשוניות יוטען לכאן באמצעות JavaScript -->
+            <p>טוען תוכן...</p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
