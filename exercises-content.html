@@ -1,0 +1,52 @@
+<!-- תוכן התרגילים המעודכן -->
+<div id="exercises" class="tab-content">
+    <h2>תרגילים</h2>
+    <p>תרגול השפה העברית</p>
+    
+    <div class="exercises-grid">
+        <div class="exercise-card" onclick="showExerciseMessage('match-letters')">
+            <h3>התאמת אותיות</h3>
+            <p>התאימו את האותיות לתמונות המתאימות</p>
+            <button class="sound-button">התחל</button>
+        </div>
+        <div class="exercise-card" onclick="showExerciseMessage('word-game')">
+            <h3>משחק מילים</h3>
+            <p>נחשו את המילה לפי התמונה</p>
+            <button class="sound-button">התחל</button>
+        </div>
+        <div class="exercise-card" onclick="showExerciseMessage('sentences-order')">
+            <h3>סדר משפטים</h3>
+            <p>סדרו את המילים במשפט בסדר הנכון</p>
+            <button class="sound-button">התחל</button>
+        </div>
+        <div class="exercise-card" onclick="showExerciseMessage('translation-quiz')">
+            <h3>חידון תרגום</h3>
+            <p>תרגמו את המילים מעברית לרוסית ולהיפך</p>
+            <button class="sound-button">התחל</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// פונקציה פשוטה להצגת הודעה עבור תרגילים בבנייה
+function showExerciseMessage(exerciseId) {
+    let message;
+    switch(exerciseId) {
+        case 'match-letters':
+            message = 'תרגיל התאמת אותיות בבנייה. יהיה זמין בקרוב!';
+            break;
+        case 'word-game':
+            message = 'משחק המילים בבנייה. יהיה זמין בקרוב!';
+            break;
+        case 'sentences-order':
+            message = 'תרגיל סידור משפטים בבנייה. יהיה זמין בקרוב!';
+            break;
+        case 'translation-quiz':
+            message = 'חידון התרגום בבנייה. יהיה זמין בקרוב!';
+            break;
+        default:
+            message = `התרגיל "${exerciseId}" בבנייה. יהיה זמין בקרוב!`;
+    }
+    alert(message);
+}
+</script>
