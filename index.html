@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>לומדים עברית</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+            min-height: 400px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,18 +27,109 @@
         </header>
         
         <div class="tab-container">
-            <button class="tab active" data-tab="alphabet" onclick="openTab('alphabet')">אותיות</button>
-            <button class="tab" data-tab="words" onclick="openTab('words')">מילים</button>
-            <button class="tab" data-tab="sentences" onclick="openTab('sentences')">משפטים</button>
-            <button class="tab" data-tab="exercises" onclick="openTab('exercises')">תרגול</button>
+            <button class="tab active" onclick="openTabDirect('alphabet')">אותיות</button>
+            <button class="tab" onclick="openTabDirect('words')">מילים</button>
+            <button class="tab" onclick="openTabDirect('sentences')">משפטים</button>
+            <button class="tab" onclick="openTabDirect('exercises')">תרגול</button>
         </div>
         
-        <div id="content-container" class="content-container">
-            <!-- התוכן של הלשוניות יוטען לכאן באמצעות JavaScript -->
-            <p>טוען תוכן...</p>
+        <!-- תוכן הלשוניות -->
+        <div id="alphabet" class="tab-content active">
+            <h2>האותיות בעברית</h2>
+            <p>לחצו על האותיות כדי לשמוע את הצליל שלהן</p>
+            
+            <div class="letter-container">
+                <div class="letter-card" onclick="playSound('alef')">
+                    <div class="letter">א</div>
+                    <div class="letter-example">אָלֶף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('bet')">
+                    <div class="letter">ב</div>
+                    <div class="letter-example">בֵּית</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('gimel')">
+                    <div class="letter">ג</div>
+                    <div class="letter-example">גִימֶל</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('dalet')">
+                    <div class="letter">ד</div>
+                    <div class="letter-example">דָּלֶת</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר האותיות כאן -->
+            </div>
+        </div>
+        
+        <div id="words" class="tab-content">
+            <h2>מילים בסיסיות</h2>
+            <p>מילים שימושיות בעברית</p>
+            
+            <div class="words-grid">
+                <div class="word-card" onclick="playSound('word-apple')">
+                    <img src="https://github.com/user-attachments/assets/07c33929-6c07-4943-8c41-4613d69d1bb6" class="word-image" alt="תפוח">
+                    <div class="hebrew-word">תַּפּוּחַ</div>
+                    <div class="translation">Яблоко</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר המילים כאן -->
+            </div>
+        </div>
+        
+        <div id="sentences" class="tab-content">
+            <h2>משפטים פשוטים</h2>
+            <p>משפטים בסיסיים בעברית</p>
+            
+            <div class="sentences-grid">
+                <div class="sentence-card" onclick="playSound('sentence-hello')">
+                    <div class="hebrew-sentence">שָׁלוֹם</div>
+                    <div class="translation">Привет</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- יתר המשפטים כאן -->
+            </div>
+        </div>
+        
+        <div id="exercises" class="tab-content">
+            <h2>תרגילים</h2>
+            <p>תרגול השפה העברית</p>
+            
+            <div class="exercises-grid">
+                <div class="exercise-card" onclick="openExercise('match-letters')">
+                    <h3>התאמת אותיות</h3>
+                    <p>התאימו את האותיות לתמונות המתאימות</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <!-- יתר התרגילים כאן -->
+            </div>
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // פונקציה לניווט בין הלשוניות ללא AJAX
+        function openTabDirect(tabName) {
+            // מסתיר את כל התוכן
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // מסיר את המחלקה 'active' מכל הלשוניות
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // מציג את התוכן הנבחר
+            document.getElementById(tabName).classList.add('active');
+            
+            // מוצא את הלשונית המתאימה ומוסיף לה את המחלקה 'active'
+            var clickedTab = event.currentTarget;
+            clickedTab.classList.add('active');
+        }
+    </script>
 </body>
 </html>
