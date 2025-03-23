@@ -17,25 +17,6 @@
         .tab-content.active {
             display: block;
         }
-        
-        .debug-panel {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            max-width: 300px;
-            max-height: 200px;
-            overflow: auto;
-            font-size: 12px;
-            direction: ltr;
-            text-align: left;
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -122,3 +103,173 @@
                     <div class="letter">מ</div>
                     <div class="letter-example">מֵם</div>
                     <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('nun')">
+                    <div class="letter">נ</div>
+                    <div class="letter-example">נוּן</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('samekh')">
+                    <div class="letter">ס</div>
+                    <div class="letter-example">סָמֶךְ</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('ayin')">
+                    <div class="letter">ע</div>
+                    <div class="letter-example">עַיִן</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('pe')">
+                    <div class="letter">פ</div>
+                    <div class="letter-example">פֵּה</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('tsadi')">
+                    <div class="letter">צ</div>
+                    <div class="letter-example">צָדִי</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('qof')">
+                    <div class="letter">ק</div>
+                    <div class="letter-example">קוֹף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('resh')">
+                    <div class="letter">ר</div>
+                    <div class="letter-example">רֵישׁ</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('shin')">
+                    <div class="letter">ש</div>
+                    <div class="letter-example">שִׁין</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('tav')">
+                    <div class="letter">ת</div>
+                    <div class="letter-example">תָּו</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="words" class="tab-content">
+            <h2>מילים בסיסיות</h2>
+            <p>מילים שימושיות בעברית</p>
+            
+            <div class="words-grid">
+                <div class="word-card" onclick="playSound('word-cat')">
+                    <img src="https://github.com/user-attachments/assets/cf467c3c-677c-409e-b8de-d987cf8490a2" class="word-image" alt="חתול">
+                    <div class="hebrew-word">חָתוּל</div>
+                    <div class="translation">Кот</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-dog')">
+                    <img src="https://github.com/user-attachments/assets/846c1758-e46b-4156-890c-0dec6d37126c" class="word-image" alt="כלב">
+                    <div class="hebrew-word">כֶּלֶב</div>
+                    <div class="translation">Собака</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-house')">
+                    <img src="https://github.com/user-attachments/assets/0c305d02-4b90-447b-a896-778d36c09019" class="word-image" alt="בית">
+                    <div class="hebrew-word">בַּיִת</div>
+                    <div class="translation">Дом</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-tree')">
+                    <img src="https://github.com/user-attachments/assets/cc64c9ac-8586-46b2-9499-59d1a692ba82" class="word-image" alt="עץ">
+                    <div class="hebrew-word">עֵץ</div>
+                    <div class="translation">Дерево</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-book')">
+                    <img src="https://github.com/user-attachments/assets/5cea7170-1d5d-4bf8-9483-1f04815acbc6" class="word-image" alt="ספר">
+                    <div class="hebrew-word">סֵפֶר</div>
+                    <div class="translation">Книга</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-sun')">
+                    <img src="https://github.com/user-attachments/assets/142f17a8-7f52-4a8f-b547-412acb26ca79" class="word-image" alt="שמש">
+                    <div class="hebrew-word">שֶׁמֶשׁ</div>
+                    <div class="translation">Солнце</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-flower')">
+                    <img src="https://github.com/user-attachments/assets/53b9ee45-3f31-4ff8-b87e-47907bb6a672" class="word-image" alt="פרח">
+                    <div class="hebrew-word">פֶּרַח</div>
+                    <div class="translation">Цветок</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('word-water')">
+                    <img src="https://github.com/user-attachments/assets/bdc5a5bb-38db-420e-bc82-8d8778f0f78d" class="word-image" alt="מים">
+                    <div class="hebrew-word">מַיִם</div>
+                    <div class="translation">Вода</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sentences" class="tab-content">
+            <h2>משפטים פשוטים</h2>
+            <p>משפטים בסיסיים בעברית</p>
+            
+            <div class="sentences-grid">
+                <div class="sentence-card" onclick="playSound('sentence-cat-eats-fish')">
+                    <div class="hebrew-sentence">הַחָתוּל אוֹכֵל דָּג</div>
+                    <div class="translation">Кот ест рыбу</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-boy-reads-book')">
+                    <div class="hebrew-sentence">הַיֶּלֶד קוֹרֵא סֵפֶר</div>
+                    <div class="translation">Мальчик читает книгу</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-girl-drinks-water')">
+                    <div class="hebrew-sentence">הַיַּלְדָּה שׁוֹתָה מַיִם</div>
+                    <div class="translation">Девочка пьет воду</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-dog-runs-garden')">
+                    <div class="hebrew-sentence">הַכֶּלֶב רָץ בַּגִּנָּה</div>
+                    <div class="translation">Собака бежит в саду</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="sentence-card" onclick="playSound('sentence-sun-shines-sky')">
+                    <div class="hebrew-sentence">הַשֶּׁמֶשׁ זוֹרַחַת בַּשָּׁמַיִם</div>
+                    <div class="translation">Солнце светит в небе</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="exercises" class="tab-content">
+            <h2>תרגילים</h2>
+            <p>תרגול השפה העברית</p>
+            
+            <div class="exercises-grid">
+                <div class="exercise-card" onclick="openExercise('match-letters')">
+                    <h3>התאמת אותיות</h3>
+                    <p>התאימו את האותיות לתמונות המתאימות</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <div class="exercise-card" onclick="openExercise('word-game')">
+                    <h3>משחק מילים</h3>
+                    <p>נחשו את המילה לפי התמונה</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <div class="exercise-card" onclick="openExercise('sentences-order')">
+                    <h3>סדר משפטים</h3>
+                    <p>סדרו את המילים במשפט בסדר הנכון</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <div class="exercise-card" onclick="openExercise('translation-quiz')">
+                    <h3>חידון תרגום</h3>
+                    <p>תרגמו את המילים מעברית לרוסית ולהיפך</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
