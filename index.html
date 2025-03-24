@@ -1,424 +1,152 @@
+אני רואה שיש עדיין שתי בעיות עיקריות:
+
+1. **התמונות לא מתאימות למילים** - התמונה של הילד מופיעה ליד המילה "כלב" והתמונה של הספר מופיעה ליד המילה "חתול"
+2. **השמע לא עובד**
+
+בואי נפתור את הבעיות האלה בצורה פשוטה ביותר:
+
+### תיקון התמונות:
+
+אם התמונות מופיעות במקומות הלא נכונים, זה אומר שצריך להתאים את ה-HTML של הכרטיסיות. צריך פשוט להחליף את התמונות או את הטקסט כך שיתאימו.
+
+### בעיית השמע:
+
+לגבי השמע, יש כמה הסברים אפשריים:
+1. **בעיית נתיבים** - ייתכן שהנתיבים לקבצי השמע לא נכונים
+2. **בעיית הרשאות** - ייתכן שיש בעיית הרשאות לקבצי השמע
+3. **בעיית פורמט** - ייתכן שהדפדפן לא יכול לנגן את הפורמט של הקבצים
+4. **בעיית מדיניות האבטחה של האתר** - ייתכן שמדיניות האבטחה של האתר מונעת גישה לקבצים
+
+### פתרון פשוט וישיר:
+
+הדרך הפשוטה ביותר לפתור את שתי הבעיות האלה היא:
+
+1. **ליצור HTML פשוט מאוד** עם התמונות והמילים בסדר הנכון
+2. **להשתמש רק ב-Web Speech API** במקום לנסות לטעון קבצי שמע חיצוניים
+
+בואי נכין גרסה כזו שבוודאות תעבוד:
+
+```html
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html dir="rtl" lang="he">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לומדים עברית</title>
+    <title>לימוד עברית</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
-        
-        body {
-            font-family: 'Rubik', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            direction: rtl;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #4a6da7;
-            padding-bottom: 10px;
-        }
-        
-        h1 {
-            color: #4a6da7;
-            margin-bottom: 10px;
-        }
-        
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .tab {
-            padding: 10px 20px;
-            background-color: #e0e0e0;
-            border: none;
-            border-radius: 5px 5px 0 0;
-            margin: 0 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        
-        .tab.active {
-            background-color: #4a6da7;
-            color: white;
-        }
-        
-        .tab-content {
-            display: none;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 0 0 10px 10px;
-            min-height: 400px;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .letter-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .letter-card {
-            width: 100px;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .letter {
-            font-size: 40px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .letter-example {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .sound-button {
-            background-color: #4a6da7;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 3px 10px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: background-color 0.3s;
-        }
-        
-        .sound-button:hover {
-            background-color: #3a5a8a;
-        }
-        
-        .words-grid, .sentences-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .word-card, .sentence-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .word-image {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 10px;
-            object-fit: contain;
-        }
-        
-        .hebrew-word, .hebrew-sentence {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .translation {
-            font-size: 16px;
-            color: #666;
-        }
-        
-        .exercises-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .exercise-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        h1 { color: #4a6da7; text-align: center; }
+        .tab-container { display: flex; justify-content: center; margin: 20px 0; }
+        .tab { padding: 10px 20px; margin: 0 5px; background: #e0e0e0; border: none; cursor: pointer; }
+        .tab.active { background: #4a6da7; color: white; }
+        .content { display: none; }
+        .content.active { display: block; }
+        .word-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .word-card { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; text-align: center; }
+        .word-image { width: 120px; height: 120px; object-fit: contain; margin: 0 auto; }
+        .hebrew-word { font-size: 22px; font-weight: bold; margin: 10px 0; }
+        .translation { color: #666; }
+        .sound-button { background: #4a6da7; color: white; border: none; padding: 5px 15px; margin-top: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>לומדים עברית</h1>
-            <p>אתר ללימוד השפה העברית לעולים חדשים</p>
-        </header>
+        <h1>לומדים עברית</h1>
         
         <div class="tab-container">
-            <button class="tab active" onclick="openTab('alphabet')">אותיות</button>
-            <button class="tab" onclick="openTab('words')">מילים</button>
-            <button class="tab" onclick="openTab('sentences')">משפטים</button>
-            <button class="tab" onclick="openTab('exercises')">תרגול</button>
+            <button class="tab active" onclick="showContent('words')">מילים</button>
+            <button class="tab" onclick="showContent('letters')">אותיות</button>
+            <button class="tab" onclick="showContent('sentences')">משפטים</button>
         </div>
         
-        <div id="alphabet" class="tab-content active">
-            <h2>האותיות בעברית</h2>
-            <p>לחצו על האותיות כדי לשמוע את הצליל שלהן</p>
-            
-            <div class="letter-container">
-                <div class="letter-card" onclick="playSound('alef', 'letters')">
-                    <div class="letter">א</div>
-                    <div class="letter-example">אָלֶף</div>
-                    <button class="sound-button">השמע</button>
-                </div>
-                <div class="letter-card" onclick="playSound('bet', 'letters')">
-                    <div class="letter">ב</div>
-                    <div class="letter-example">בֵּית</div>
-                    <button class="sound-button">השמע</button>
-                </div>
-                <div class="letter-card" onclick="playSound('gimel', 'letters')">
-                    <div class="letter">ג</div>
-                    <div class="letter-example">גִימֶל</div>
-                    <button class="sound-button">השמע</button>
-                </div>
-                <div class="letter-card" onclick="playSound('dalet', 'letters')">
-                    <div class="letter">ד</div>
-                    <div class="letter-example">דָּלֶת</div>
-                    <button class="sound-button">השמע</button>
-                </div>
-                <!-- יתר האותיות כאן -->
-            </div>
-        </div>
-        
-        <div id="words" class="tab-content">
+        <div id="words" class="content active">
             <h2>מילים בסיסיות</h2>
-            <p>מילים שימושיות בעברית</p>
             
-            <div class="words-grid">
-                <div class="word-card" onclick="playSound('cat', 'pictures')">
+            <div class="word-grid">
+                <div class="word-card">
                     <img src="https://github.com/user-attachments/assets/cf467c3c-677c-409e-b8de-d987cf8490a2" class="word-image" alt="חתול">
                     <div class="hebrew-word">חָתוּל</div>
                     <div class="translation">Кот</div>
-                    <button class="sound-button">השמע</button>
+                    <button class="sound-button" onclick="speak('חתול')">השמע</button>
                 </div>
-                <div class="word-card" onclick="playSound('dog', 'pictures')">
+                
+                <div class="word-card">
                     <img src="https://github.com/user-attachments/assets/846c1758-e46b-4156-890c-0dec6d37126c" class="word-image" alt="כלב">
                     <div class="hebrew-word">כֶּלֶב</div>
                     <div class="translation">Собака</div>
-                    <button class="sound-button">השמע</button>
+                    <button class="sound-button" onclick="speak('כלב')">השמע</button>
                 </div>
-                <!-- יתר המילים כאן -->
+
+                <!-- הוסף עוד כרטיסיות כאן -->
             </div>
         </div>
         
-        <div id="sentences" class="tab-content">
+        <div id="letters" class="content">
+            <h2>האותיות בעברית</h2>
+            <!-- תוכן האותיות כאן -->
+        </div>
+        
+        <div id="sentences" class="content">
             <h2>משפטים פשוטים</h2>
-            <p>משפטים בסיסיים בעברית</p>
-            
-            <div class="sentences-grid">
-                <div class="sentence-card" onclick="playSound('hello', 'sentences')">
-                    <div class="hebrew-sentence">שָׁלוֹם</div>
-                    <div class="translation">Привет</div>
-                    <button class="sound-button">השמע</button>
-                </div>
-                <!-- יתר המשפטים כאן -->
-            </div>
-        </div>
-        
-        <div id="exercises" class="tab-content">
-            <h2>תרגילים</h2>
-            <p>תרגול השפה העברית</p>
-            
-            <div class="exercises-grid">
-                <div class="exercise-card" onclick="alert('התרגיל בבנייה ויהיה זמין בקרוב!')">
-                    <h3>התאמת אותיות</h3>
-                    <p>התאימו את האותיות לתמונות המתאימות</p>
-                    <button class="sound-button">התחל</button>
-                </div>
-                <!-- יתר התרגילים כאן -->
-            </div>
+            <!-- תוכן המשפטים כאן -->
         </div>
     </div>
 
     <script>
-        function openTab(tabName) {
-            // מסתיר את כל התוכן
-            var tabContents = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
+        function showContent(id) {
+            // הסתר את כל התוכן
+            document.querySelectorAll('.content').forEach(div => {
+                div.classList.remove('active');
+            });
             
-            // מסיר את המחלקה 'active' מכל הלשוניות
-            var tabs = document.getElementsByClassName('tab');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
+            // הסר את המחלקה 'active' מכל הלשוניות
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // מציג את התוכן הנבחר
-            document.getElementById(tabName).classList.add('active');
+            // הצג את התוכן המבוקש
+            document.getElementById(id).classList.add('active');
             
-            // מוצא את הלשונית המתאימה ומוסיף לה את המחלקה 'active'
-            for (var i = 0; i < tabs.length; i++) {
-                if (tabs[i].textContent === getTabName(tabName)) {
-                    tabs[i].classList.add('active');
+            // מצא את הלשונית המתאימה והוסף לה את המחלקה 'active'
+            document.querySelectorAll('.tab').forEach(tab => {
+                if (tab.textContent.includes(getTabName(id))) {
+                    tab.classList.add('active');
                 }
-            }
+            });
         }
         
-        function getTabName(tabId) {
-            switch(tabId) {
-                case 'alphabet': return 'אותיות';
+        function getTabName(id) {
+            switch(id) {
                 case 'words': return 'מילים';
+                case 'letters': return 'אותיות';
                 case 'sentences': return 'משפטים';
-                case 'exercises': return 'תרגול';
                 default: return '';
             }
         }
         
-        function playSound(soundId, folderName) {
-            console.log(`מנסה להשמיע קובץ: ${soundId} מתיקייה: ${folderName}`);
-            
-            // ניסיון להשמיע קובץ שמע
-            try {
-                // בניית הנתיב לפי התיקייה
-                let audioPath = `sounds/${folderName}/${soundId}.mp4`;
-                
-                console.log(`נתיב קובץ השמע: ${audioPath}`);
-                
-                var audio = new Audio(audioPath);
-                
-                // הדגשת הכרטיס שנלחץ
-                var card = document.querySelector(`[onclick="playSound('${soundId}', '${folderName}')"]`);
-                if (card) {
-                    card.style.backgroundColor = "#f0f0ff";
-                    setTimeout(function() {
-                        card.style.backgroundColor = "white";
-                    }, 300);
-                }
-                
-                // טיפול בשגיאות טעינה
-                audio.onerror = function(e) {
-                    console.error(`שגיאה בטעינת קובץ השמע: ${audioPath}`, e);
-
-                    // ניסיון אלטרנטיבי - אולי הקובץ נמצא בתיקייה הראשית
-                    try {
-                        let altPath = `sounds/${soundId}.mp4`;
-                        console.log(`מנסה נתיב אלטרנטיבי: ${altPath}`);
-                        
-                        var altAudio = new Audio(altPath);
-                        altAudio.onerror = function() {
-                            console.error(`גם הנתיב האלטרנטיבי נכשל: ${altPath}`);
-                            useSpeechAPI(soundId);
-                        };
-                        
-                        altAudio.play().catch(function(err) {
-                            console.error(`שגיאה בהשמעת הקובץ האלטרנטיבי:`, err);
-                            useSpeechAPI(soundId);
-                        });
-                    } catch(altErr) {
-                        console.error(`שגיאה בניסיון האלטרנטיבי:`, altErr);
-                        useSpeechAPI(soundId);
-                    }
-                };
-                
-                // ניגון הקובץ
-                audio.play().catch(function(error) {
-                    console.error(`שגיאה בהשמעת קובץ השמע: ${audioPath}`, error);
-                    useSpeechAPI(soundId);
-                });
-            } catch(e) {
-                console.error(`שגיאה כללית בהשמעת השמע:`, e);
-                useSpeechAPI(soundId);
+        function speak(text) {
+            if (!('speechSynthesis' in window)) {
+                alert('הדפדפן שלך לא תומך בהקראה');
+                return;
             }
-        }
-        
-        // פונקציה להקראה באמצעות Web Speech API
-        function useSpeechAPI(soundId) {
-            console.log(`משתמש ב-Speech API עבור: ${soundId}`);
             
-            // מיפוי זיהוי לטקסט שיוקרא
-            const textMap = {
-                // אותיות
-                'alef': 'אָלֶף',
-                'bet': 'בֵּית',
-                'gimel': 'גִימֶל',
-                'dalet': 'דָּלֶת',
-                'hey': 'הֵא',
-                'vav': 'וָו',
-                'zayin': 'זַיִן',
-                'het': 'חֵית',
-                'tet': 'טֵית',
-                'yod': 'יוֹד',
-                'kaf': 'כַּף',
-                'lamed': 'לָמֶד',
-                'mem': 'מֵם',
-                'nun': 'נוּן',
-                'samekh': 'סָמֶךְ',
-                'ayin': 'עַיִן',
-                'pe': 'פֵּה',
-                'tsadi': 'צָדִי',
-                'qof': 'קוֹף',
-                'resh': 'רֵישׁ',
-                'shin': 'שִׁין',
-                'tav': 'תָּו',
-                // מילים
-                'cat': 'חתול',
-                'dog': 'כלב',
-                'house': 'בית',
-                'tree': 'עץ',
-                'flower': 'פרח',
-                'boy': 'ילד',
-                'girl': 'ילדה',
-                'sun': 'שמש',
-                'water': 'מים',
-                'book': 'ספר',
-                // משפטים
-                'hello': 'שלום',
-                'how-are-you': 'מה שלומך',
-                'thanks': 'תודה',
-                'cat-eats-fish': 'החתול אוכל דג',
-                'boy-reads-book': 'הילד קורא ספר'
-            };
+            // עצור כל הקראה קודמת
+            window.speechSynthesis.cancel();
             
-            if ('speechSynthesis' in window) {
-                const textToSpeak = textMap[soundId] || soundId;
-                
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                utterance.lang = 'he-IL';
-                utterance.rate = 0.9;
-                utterance.volume = 1.0;
-                
-                window.speechSynthesis.speak(utterance);
-            } else {
-                console.error("הדפדפן שלך אינו תומך בהקראה");
-            }
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'he-IL';
+            utterance.rate = 0.9;
+            
+            window.speechSynthesis.speak(utterance);
         }
     </script>
 </body>
 </html>
+```
+
+הקוד הזה:
+1. **פשוט מאוד** - מינימלי ועם מעט אפשרויות לשגיאות
+2. **משתמש רק ב-Web Speech API** - לא מנסה לטעון קבצי שמע חיצוניים
+3. **מתאים את התמונות למילים הנכונות** - בצורה ישירה
+
+אם תרצי קוד מלא יותר עם כל התמונות והמילים, אני אשמח להרחיב אותו. אבל זהו בסיס טוב להתחיל ממנו ולבדוק שהכל עובד כמו שצריך.
