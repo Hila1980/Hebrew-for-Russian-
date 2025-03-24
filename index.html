@@ -192,22 +192,22 @@
             <p>לחצו על האותיות כדי לשמוע את הצליל שלהן</p>
             
             <div class="letter-container">
-                <div class="letter-card" onclick="playSound('alef')">
+                <div class="letter-card" onclick="playSound('alef', 'letters')">
                     <div class="letter">א</div>
                     <div class="letter-example">אָלֶף</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <div class="letter-card" onclick="playSound('bet')">
+                <div class="letter-card" onclick="playSound('bet', 'letters')">
                     <div class="letter">ב</div>
                     <div class="letter-example">בֵּית</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <div class="letter-card" onclick="playSound('gimel')">
+                <div class="letter-card" onclick="playSound('gimel', 'letters')">
                     <div class="letter">ג</div>
                     <div class="letter-example">גִימֶל</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <div class="letter-card" onclick="playSound('dalet')">
+                <div class="letter-card" onclick="playSound('dalet', 'letters')">
                     <div class="letter">ד</div>
                     <div class="letter-example">דָּלֶת</div>
                     <button class="sound-button">השמע</button>
@@ -221,13 +221,13 @@
             <p>מילים שימושיות בעברית</p>
             
             <div class="words-grid">
-                <div class="word-card" onclick="playSound('word-cat')">
+                <div class="word-card" onclick="playSound('cat', 'pictures')">
                     <img src="https://github.com/user-attachments/assets/cf467c3c-677c-409e-b8de-d987cf8490a2" class="word-image" alt="חתול">
                     <div class="hebrew-word">חָתוּל</div>
                     <div class="translation">Кот</div>
                     <button class="sound-button">השמע</button>
                 </div>
-                <div class="word-card" onclick="playSound('word-dog')">
+                <div class="word-card" onclick="playSound('dog', 'pictures')">
                     <img src="https://github.com/user-attachments/assets/846c1758-e46b-4156-890c-0dec6d37126c" class="word-image" alt="כלב">
                     <div class="hebrew-word">כֶּלֶב</div>
                     <div class="translation">Собака</div>
@@ -242,7 +242,7 @@
             <p>משפטים בסיסיים בעברית</p>
             
             <div class="sentences-grid">
-                <div class="sentence-card" onclick="playSound('sentence-hello')">
+                <div class="sentence-card" onclick="playSound('hello', 'sentences')">
                     <div class="hebrew-sentence">שָׁלוֹם</div>
                     <div class="translation">Привет</div>
                     <button class="sound-button">השמע</button>
@@ -301,17 +301,122 @@
             }
         }
         
-        function playSound(soundId) {
+        function playSound(soundId, folderName) {
+            console.log(`מנסה להשמיע קובץ: ${soundId} מתיקייה: ${folderName}`);
+            
             // ניסיון להשמיע קובץ שמע
             try {
-                var audio = new Audio('sounds/' + soundId + '.mp4');  // שימוש בסיומת MP4 במקום MP3
+                // בניית הנתיב לפי התיקייה
+                let audioPath = `sounds/${folderName}/${soundId}.mp4`;
+                
+                console.log(`נתיב קובץ השמע: ${audioPath}`);
+                
+                var audio = new Audio(audioPath);
+                
+                // הדגשת הכרטיס שנלחץ
+                var card = document.querySelector(`[onclick="playSound('${soundId}', '${folderName}')"]`);
+                if (card) {
+                    card.style.backgroundColor = "#f0f0ff";
+                    setTimeout(function() {
+                        card.style.backgroundColor = "white";
+                    }, 300);
+                }
+                
+                // טיפול בשגיאות טעינה
+                audio.onerror = function(e) {
+                    console.error(`שגיאה בטעינת קובץ השמע: ${audioPath}`, e);
+
+                    // ניסיון אלטרנטיבי - אולי הקובץ נמצא בתיקייה הראשית
+                    try {
+                        let altPath = `sounds/${soundId}.mp4`;
+                        console.log(`מנסה נתיב אלטרנטיבי: ${altPath}`);
+                        
+                        var altAudio = new Audio(altPath);
+                        altAudio.onerror = function() {
+                            console.error(`גם הנתיב האלטרנטיבי נכשל: ${altPath}`);
+                            useSpeechAPI(soundId);
+                        };
+                        
+                        altAudio.play().catch(function(err) {
+                            console.error(`שגיאה בהשמעת הקובץ האלטרנטיבי:`, err);
+                            useSpeechAPI(soundId);
+                        });
+                    } catch(altErr) {
+                        console.error(`שגיאה בניסיון האלטרנטיבי:`, altErr);
+                        useSpeechAPI(soundId);
+                    }
+                };
+                
+                // ניגון הקובץ
                 audio.play().catch(function(error) {
-                    console.error("שגיאה בהשמעת קובץ שמע:", error);
-                    alert("לא ניתן להשמיע את הצליל כרגע");
+                    console.error(`שגיאה בהשמעת קובץ השמע: ${audioPath}`, error);
+                    useSpeechAPI(soundId);
                 });
             } catch(e) {
-                console.error("שגיאה בהשמעת קובץ שמע:", e);
-                alert("לא ניתן להשמיע את הצליל כרגע");
+                console.error(`שגיאה כללית בהשמעת השמע:`, e);
+                useSpeechAPI(soundId);
+            }
+        }
+        
+        // פונקציה להקראה באמצעות Web Speech API
+        function useSpeechAPI(soundId) {
+            console.log(`משתמש ב-Speech API עבור: ${soundId}`);
+            
+            // מיפוי זיהוי לטקסט שיוקרא
+            const textMap = {
+                // אותיות
+                'alef': 'אָלֶף',
+                'bet': 'בֵּית',
+                'gimel': 'גִימֶל',
+                'dalet': 'דָּלֶת',
+                'hey': 'הֵא',
+                'vav': 'וָו',
+                'zayin': 'זַיִן',
+                'het': 'חֵית',
+                'tet': 'טֵית',
+                'yod': 'יוֹד',
+                'kaf': 'כַּף',
+                'lamed': 'לָמֶד',
+                'mem': 'מֵם',
+                'nun': 'נוּן',
+                'samekh': 'סָמֶךְ',
+                'ayin': 'עַיִן',
+                'pe': 'פֵּה',
+                'tsadi': 'צָדִי',
+                'qof': 'קוֹף',
+                'resh': 'רֵישׁ',
+                'shin': 'שִׁין',
+                'tav': 'תָּו',
+                // מילים
+                'cat': 'חתול',
+                'dog': 'כלב',
+                'house': 'בית',
+                'tree': 'עץ',
+                'flower': 'פרח',
+                'boy': 'ילד',
+                'girl': 'ילדה',
+                'sun': 'שמש',
+                'water': 'מים',
+                'book': 'ספר',
+                // משפטים
+                'hello': 'שלום',
+                'how-are-you': 'מה שלומך',
+                'thanks': 'תודה',
+                'cat-eats-fish': 'החתול אוכל דג',
+                'boy-reads-book': 'הילד קורא ספר'
+            };
+            
+            if ('speechSynthesis' in window) {
+                const textToSpeak = textMap[soundId] || soundId;
+                
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'he-IL';
+                utterance.rate = 0.9;
+                utterance.volume = 1.0;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.error("הדפדפן שלך אינו תומך בהקראה");
             }
         }
     </script>
