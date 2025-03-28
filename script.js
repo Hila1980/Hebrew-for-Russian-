@@ -38,13 +38,23 @@ function getTabName(tabId) {
 function playSound(soundId, folderName) {
     console.log(`מנסה להשמיע קובץ: ${soundId} מתיקייה: ${folderName}`);
     
-    // ניסיון להשמיע קובץ שמע
+    // נתיב חדש שמתאים למבנה התיקיות החדש
+    let audioPath;
+    
+    // בניית הנתיב לפי התיקייה
+    if (folderName === 'letters') {
+        audioPath = `media/sounds/letters/${soundId}.mp3`;
+    } else if (folderName === 'words') {
+        audioPath = `media/sounds/word/${soundId}.mp3`;
+    } else if (folderName === 'sentences') {
+        audioPath = `media/sounds/sentences/${soundId}.mp3`;
+    } else {
+        audioPath = `media/sounds/${soundId}.mp3`;
+    }
+    
+    console.log(`נתיב קובץ השמע: ${audioPath}`);
+    
     try {
-        // בניית הנתיב לפי התיקייה - משתמשים ב-mp3 שהיא נפוצה יותר
-        let audioPath = `sounds/${folderName}/${soundId}.mp3`;
-        
-        console.log(`נתיב קובץ השמע: ${audioPath}`);
-        
         var audio = new Audio(audioPath);
         
         // הדגשת הכרטיס שנלחץ
@@ -59,8 +69,6 @@ function playSound(soundId, folderName) {
         // טיפול בשגיאות טעינה
         audio.onerror = function(e) {
             console.error(`שגיאה בטעינת קובץ השמע: ${audioPath}`, e);
-            
-            // ניסיון להשתמש ב-Web Speech API כגיבוי
             useSpeechAPI(soundId);
         };
         
