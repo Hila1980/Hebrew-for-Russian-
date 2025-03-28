@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>לומדים עברית</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>לומדים עברית</h1>
+            <p>אתר ללימוד השפה העברית לעולים חדשים</p>
+        </header>
+        
+        <div class="tab-container">
+            <button class="tab active" onclick="openTab('alphabet')">אותיות</button>
+            <button class="tab" onclick="openTab('words')">מילים</button>
+            <button class="tab" onclick="openTab('sentences')">משפטים</button>
+            <button class="tab" onclick="openTab('exercises')">תרגול</button>
+        </div>
+        
+        <div id="alphabet" class="tab-content active">
+            <h2>האותיות בעברית</h2>
+            <p>לחצו על האותיות כדי לשמוע את הצליל שלהן</p>
+            
+            <div class="letter-container">
+                <div class="letter-card" onclick="playSound('alef', 'letters')">
+                    <div class="letter">א</div>
+                    <div class="letter-example">אלף</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('bet', 'letters')">
+                    <div class="letter">ב</div>
+                    <div class="letter-example">בית</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('gimel', 'letters')">
+                    <div class="letter">ג</div>
+                    <div class="letter-example">גימל</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="letter-card" onclick="playSound('dalet', 'letters')">
+                    <div class="letter">ד</div>
+                    <div class="letter-example">דלת</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- שאר האותיות העבריות -->
+            </div>
+        </div>
+        
+        <div id="words" class="tab-content">
+            <h2>מילים בסיסיות</h2>
+            <p>מילים שימושיות בעברית</p>
+            
+            <div class="words-grid">
+                <div class="word-card" onclick="playSound('cat', 'words')">
+                    <img src="images/words/cat.jpg" class="word-image" alt="חתול">
+                    <div class="hebrew-word">חתול</div>
+                    <div class="translation">Кот</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <div class="word-card" onclick="playSound('dog', 'words')">
+                    <img src="images/words/dog.jpg" class="word-image" alt="כלב">
+                    <div class="hebrew-word">כלב</div>
+                    <div class="translation">Собака</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- שאר המילים -->
+            </div>
+        </div>
+        
+        <div id="sentences" class="tab-content">
+            <h2>משפטים פשוטים</h2>
+            <p>משפטים בסיסיים בעברית</p>
+            
+            <div class="sentences-grid">
+                <div class="sentence-card" onclick="playSound('hello', 'sentences')">
+                    <div class="hebrew-sentence">שלום</div>
+                    <div class="translation">Привет</div>
+                    <button class="sound-button">השמע</button>
+                </div>
+                <!-- שאר המשפטים -->
+            </div>
+        </div>
+        
+        <div id="exercises" class="tab-content">
+            <h2>תרגילים</h2>
+            <p>תרגול השפה העברית</p>
+            
+            <div class="exercises-grid">
+                <div class="exercise-card" onclick="alert('התרגיל בבנייה ויהיה זמין בקרוב!')">
+                    <h3>התאמת אותיות</h3>
+                    <p>התאימו את האותיות לתמונות המתאימות</p>
+                    <button class="sound-button">התחל</button>
+                </div>
+                <!-- שאר התרגילים -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
